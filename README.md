@@ -1,20 +1,20 @@
 # Aquivo ATO · signed firmware releases
 
-**Production OTA channel: 1.0.2. Firmware 1.1.0 is on validation hold after a live restart during its first GitHub OTA test. Do not install 1.1.0 until this notice is removed. The separate HASS card1.1.0 has passed validation and remains available.**
-
 Public, token-free OTA updates for **Aquivo / AQUIVO-ATO-ZB**, ESP32-C6. Customer downloads never require a GitHub account, access token or periodic key renewal. Firmware sources, private signing keys and device backups are not distributed in this repository.
 
-## Version 1.1.0
+## Version 1.1.1
 
 Offline web interface, Wi-Fi setup and installation guide in **Slovenčina, Čeština, Magyar, Polski, English, Deutsch and Français**. Language follows the browser; a selector remembers your choice in that browser. Translations require no internet. Bundled Home Assistant card1.1.0 follows the HASS user’s language, with an editor/YAML override.
 
 Device mode, calibration, counters, NVS schema6, GPIO wiring, Zigbee identity/endpoints and MQTT topics are unchanged. Language changes send no device commands. Updates require SERVICE and a stopped pump; the device stays in SERVICE after restart. Settings are preserved.
 
+Firmware1.1.1 also fixes version reporting: status HTTP API, OTA metadata and Zigbee SW Build ID now use the same compiled application version. Firmware1.1.0 had two stale1.0.2 labels and is retained as a pre-release for the validation record. The independently published HASS card remains version1.1.0.
+
 ## Install an update
 
 Open the device web interface → New firmware versions → Check for updates. Confirm the offered version while in SERVICE. The device downloads and verifies the manufacturer signature, model, length and SHA256 before activating the inactive OTA slot. Keep power connected. Boot health verification and rollback remain enabled. Automatic checking runs after boot and every6 hours when Wi-Fi and verified time are available; installation is manually confirmed.
 
-For a manual upload, download both `Aquivo-ATO-OTA-1.1.0.bin` and `Aquivo-ATO-OTA-1.1.0.manifest.json` from Releases. Choose both in the device’s Firmware update form. Use the application image only, never a complete flash backup or bootloader. If the result is uncertain, reconnect and check the version before trying again.
+For a manual upload, download both `Aquivo-ATO-OTA-1.1.1.bin` and `Aquivo-ATO-OTA-1.1.1.manifest.json` from Releases. Choose both in the device’s Firmware update form. Use the application image only, never a complete flash backup or bootloader. If the result is uncertain, reconnect and check the version before trying again.
 
 `latest.json` is a signed manifest. ECDSA-P256/SHA256 covers the exact model, version, byte length and full image digest. The private key is never present in the device or public files. Signatures authenticate OTA updates; hardware Secure Boot/flash encryption and clone protection are separate.
 
