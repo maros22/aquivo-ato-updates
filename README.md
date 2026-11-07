@@ -1,38 +1,27 @@
-# Aquivo ATO · aktualizácie firmvéru
+# Aquivo ATO · signed firmware releases
 
-Verejné podpísané vydania pre **Aquivo ATO**, ESP32-C6. Aktuálna verzia: **1.0.2**.
+Public, token-free OTA updates for **Aquivo / AQUIVO-ATO-ZB**, ESP32-C6. Customer downloads never require a GitHub account, access token or periodic key renewal. Firmware sources, private signing keys and device backups are not distributed in this repository.
 
-## Aktualizácia
+## Version 1.1.0
 
-Vo webe ATO otvor **Nové verzie firmvéru** → **Overiť nové vydanie**. Novšiu verziu nainštaluj v SERVICE so zastavenou pumpou. Kontrola beží aj automaticky; inštalácia vyžaduje tvoj pokyn. Nie je potrebný GitHub účet ani kľúč.
+Offline web interface, Wi-Fi setup and installation guide in **Slovenčina, Čeština, Magyar, Polski, English, Deutsch and Français**. Language follows the browser; a selector remembers your choice in that browser. Translations require no internet. Bundled Home Assistant card1.1.0 follows the HASS user’s language, with an editor/YAML override.
 
-Pri ručnej aktualizácii stiahni z [Releases](https://github.com/maros22/aquivo-ato-updates/releases/latest) súbory `Aquivo-ATO-OTA-X.Y.Z.bin` a zodpovedajúci `.manifest.json`. Vyber oba na webe ATO. ZIP nie je firmvér.
+Device mode, calibration, counters, NVS schema6, GPIO wiring, Zigbee identity/endpoints and MQTT topics are unchanged. Language changes send no device commands. Updates require SERVICE and a stopped pump; the device stays in SERVICE after restart. Settings are preserved.
 
-Prvý prechod z RC13 vyžaduje USB balík výrobcu; starší firmvér ešte OTA nemá. Po migrácii skontroluj zachovanie kalibrácie, zásobníka a počítadiel. Tento balík nie je určený pre Dose 3 ani Z-Wave ATO.
+## Install an update
 
-## Overenie
+Open the device web interface → New firmware versions → Check for updates. Confirm the offered version while in SERVICE. The device downloads and verifies the manufacturer signature, model, length and SHA256 before activating the inactive OTA slot. Keep power connected. Boot health verification and rollback remain enabled. Automatic checking runs after boot and every6 hours when Wi-Fi and verified time are available; installation is manually confirmed.
 
-ATO kontroluje model, veľkosť, verziu, SHA256 a podpis ECDSA-P256. Neplatný balík sa neaktivuje. Pre kontrolu cez HTTPS potrebuje Wi-Fi a synchronizovaný čas. Pri OTA sa zapisuje neaktívny oddiel; funkčnosť novej aplikácie sa overí po štarte a pri zlyhaní sa použije predchádzajúci oddiel.
+For a manual upload, download both `Aquivo-ATO-OTA-1.1.0.bin` and `Aquivo-ATO-OTA-1.1.0.manifest.json` from Releases. Choose both in the device’s Firmware update form. Use the application image only, never a complete flash backup or bootloader. If the result is uncertain, reconnect and check the version before trying again.
 
-Podpisy chránia cestu aktualizácie. Hardvérové Secure Boot ani Flash Encryption tým nie sú zapnuté. Zdrojový kód, súkromný podpisový kľúč, konfigurácie a zálohy zariadení sa tu nezverejňujú.
+`latest.json` is a signed manifest. ECDSA-P256/SHA256 covers the exact model, version, byte length and full image digest. The private key is never present in the device or public files. Signatures authenticate OTA updates; hardware Secure Boot/flash encryption and clone protection are separate.
 
-## Karta Home Assistant
+## Home Assistant / HACS
 
-[Karta, HACS a návod](https://github.com/maros22/aquivo-ato-card). Kartu a lokálny návod možno stiahnuť aj priamo z webu ATO cez **Karta pre Home Assistant**.
+Card repository: [maros22/aquivo-ato-card](https://github.com/maros22/aquivo-ato-card).
 
-## Vydanie 1.0.2
+[Open custom repository in HACS](https://my.home-assistant.io/redirect/hacs_repository/?owner=maros22&repository=aquivo-ato-card&category=plugin), category **Dashboard**. The card repository includes installation instructions in all seven languages. This is a custom HACS repository; default catalog inclusion is separate. The same card and guide are downloadable directly from ATO at `/hass`, even offline.
 
-Úplné označenie Aquivo: model AQUIVO-ATO-ZB, výrobca Aquivo, karta custom:aquivo-ato-card, súbory aquivo-ato-card.js a integrácia aquivo_ato. MQTT témy sú aquivo/ato-<MAC>/…; pri prechode v Homey nahraď Topics v existujúcom zariadení podľa exportu z webu ATO. Existujúce zariadenie a jeho históriu v HASS nemaž. Pri migrácii obnov interview a konfiguráciu v Zigbee2MQTT.
+Card and firmware updates are separate. Existing devices, entities, history and Homey MQTT mappings can be retained. MQTT topics remain `aquivo/ato-<MAC>/…`.
 
-
-
-Pribalená karta1.0.2 a lokálny návod. Riadenie pumpy, kalibrácia, počítadlá a prihlasovacie údaje pripojení sa nemenia.
-
-## Základ vydania1.0.0
-
-- Produkčný web, karta a automatický odkaz na aktuálnu DHCP adresu.
-- Verejné podpísané OTA bez zákazníckych kľúčov.
-- Zachovanie kalibrácie, konfigurácie, objemov a Zigbee/MQTT pripojenia pri migrácii.
-- Trvalé ochranné 24-hodinové obdobie aj po reštarte. Bez overeného času sa neznámy čas bez napájania nezapočíta.
-
-Ochranný 24-hodinový limit ATO a údaj „Dopustené dnes“ z histórie HASS sú samostatné hodnoty. Objemy sú odhad podľa kalibrácie pumpy.
+First devices on the old1.0.0 technical model require the manufacturer’s private one-time migration to the Aquivo model before these public manifests can be used. Devices already on1.0.2 can update normally. No pairing reset, factory reset or erase-flash is required.
