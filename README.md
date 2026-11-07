@@ -1,6 +1,6 @@
 # Aquivo ATO · aktualizácie firmvéru
 
-Verejné podpísané vydania pre **NET4U-ATO-ZB**, ESP32-C6. Aktuálna verzia: **1.0.0**.
+Verejné podpísané vydania pre **Aquivo ATO**, ESP32-C6. Aktuálna verzia: **1.0.2**.
 
 ## Aktualizácia
 
@@ -20,7 +20,15 @@ Podpisy chránia cestu aktualizácie. Hardvérové Secure Boot ani Flash Encrypt
 
 [Karta, HACS a návod](https://github.com/maros22/aquivo-ato-card). Kartu a lokálny návod možno stiahnuť aj priamo z webu ATO cez **Karta pre Home Assistant**.
 
-## Vydanie 1.0.0
+## Vydanie 1.0.2
+
+Úplné označenie Aquivo: model AQUIVO-ATO-ZB, výrobca Aquivo, karta custom:aquivo-ato-card, súbory aquivo-ato-card.js a integrácia aquivo_ato. MQTT témy sú aquivo/ato-<MAC>/…; pri prechode v Homey nahraď Topics v existujúcom zariadení podľa exportu z webu ATO. Existujúce zariadenie a jeho históriu v HASS nemaž. Pri migrácii obnov interview a konfiguráciu v Zigbee2MQTT.
+
+
+
+Pribalená karta1.0.2 a lokálny návod. Riadenie pumpy, kalibrácia, počítadlá a prihlasovacie údaje pripojení sa nemenia.
+
+## Základ vydania1.0.0
 
 - Produkčný web, karta a automatický odkaz na aktuálnu DHCP adresu.
 - Verejné podpísané OTA bez zákazníckych kľúčov.
