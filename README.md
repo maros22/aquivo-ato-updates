@@ -1,5 +1,7 @@
 # Aquivo ATO · signed firmware releases
 
+**Production OTA channel: 1.0.2. Firmware 1.1.0 is on validation hold after a live restart during its first GitHub OTA test. Do not install 1.1.0 until this notice is removed. The separate HASS card1.1.0 has passed validation and remains available.**
+
 Public, token-free OTA updates for **Aquivo / AQUIVO-ATO-ZB**, ESP32-C6. Customer downloads never require a GitHub account, access token or periodic key renewal. Firmware sources, private signing keys and device backups are not distributed in this repository.
 
 ## Version 1.1.0
